@@ -1,0 +1,578 @@
+{
+  "1": {
+    "question": "Tu preferes ?",
+    "1": {
+      "text": "Chocolatine",
+      "category": "Sympa",
+      "value": "1"
+    },
+    "2": {
+      "text": "Pain au chocolat",
+      "category": "Aventurier",
+      "value": "1"
+    },
+    "3": {
+      "text": "M'en fous",
+      "category": "Blasé",
+      "value": "1"
+    },
+    "4": {
+      "text": "Débat puéril et incipide",
+      "category": "Sérieux",
+      "value": "1"
+    }
+  },
+  "2": {
+    "question": "Ton niveau global en informatique est plutôt:",
+    "1": {
+      "text": "Je decouvre ce monde merveilleux mais je connais pas encore",
+      "category": "Informatique",
+      "value": "0"
+    },
+    "2": {
+      "text": "Je connais mes bases (bureautique), mais je connais pas trop tout ce qui est technique",
+      "category": "Informatique",
+      "value": "1"
+    },
+    "3": {
+      "text": "Je me suis dejà un peu interessé à la programmation ou bidouille des trucs sur mon ordi",
+      "category": "Informatique",
+      "value": "2"
+    },
+    "4": {
+      "text": "Je connais au moins un langage de programmation et j'ai deja creer un programme (meme s'il est petit)",
+      "category": "Informatique",
+      "value": "3"
+    }
+  },
+  "3": {
+    "question": "Tes potes te jalousent...",
+    "1": {
+      "text": "...quand tu geek pépouze",
+      "category": "Informatique",
+      "value": "1"
+    },
+    "2": {
+      "text": "...quand tu es dans ta maison andalouse",
+      "category": "Aventurier",
+      "value": "1"
+    },
+    "3": {
+      "text": "...quand tu les trace sur la pelouse",
+      "category": "Sportif",
+      "value": "1"
+    },
+    "4": {
+      "text": "... quand tu bois 6 binouses",
+      "category": "Fêtard",
+      "value": "1"
+    }
+  },
+  "4": {
+    "question": "Le soir c'est souvent...",
+    "1": {
+      "text": "Cuisine gastronomique a coup de thym et d'herbes de provence. Dans la vie y a ceux qui ont du goût, et les autres.",
+      "category": "Sympa",
+      "value": "1"
+    },
+    "2": {
+      "text": "Cuisine gastronomique a coup de thym et d'herbes de provence MAIS c'est la bouffe préparée par môman ou pôpa",
+      "category": "Flemmard",
+      "value": "1"
+    },
+    "3": {
+      "text": "ALL HAIL MCDO ! \n (y reste plus de pâtes au poivre...)",
+      "category": "Flemmard",
+      "value": "2"
+    },
+    "4": {
+      "text": "Un petit potage, ou une salade de légumes bio acheté au marché",
+      "category": "Sérieux",
+      "value": "1"
+    }
+  },
+  "5": {
+    "question": "Tu habites à 600m de la fac...",
+    "1": {
+      "text": "tu prends la voiture pour venir",
+      "category": "Flemmard",
+      "value": "2"
+    },
+    "2": {
+      "text": "tu viens à pieds, à vélo, à trotinette, à skate, ou à jetpack",
+      "category": "Sportif",
+      "value": "1"
+    },
+    "3": {
+      "text": "tu viens à la fac avec... ça dépend le timing",
+      "category": "Blasé",
+      "value": "1"
+    },
+    "4": {
+      "text": "Non",
+      "category": "Sérieux",
+      "value": "1"
+    }
+  },
+  "6": {
+    "question": "La blague du 'Tir mon doigt' en 2018, c'est ...",
+    "1": {
+      "text": "Sans doute une manière de dire merci dans un pays que vous n'avez pas encore visité",
+      "category": "Aventurier",
+      "value": "1"
+    },
+    "2": {
+      "text": "Carrément nul",
+      "category": "Sérieux",
+      "value": "1"
+    },
+    "3": {
+      "text": "Un tisseur de liens sociaux, un bon moyen 'd'évacuer' le stress de la journée",
+      "category": "Sympa",
+      "value": "1"
+    },
+    "4": {
+      "text": "Une ode à la nature, l'éloge des éléments, un alexandrin posé sur les lèvres de la finesse",
+      "category": "Sympa",
+      "value": "2"
+    }
+  },
+  "7": {
+    "question": "I'm...",
+    "1": {
+      "text": "BATMAN",
+      "category": "Sympa",
+      "value": "1"
+    },
+    "2": {
+      "text": "BOITE-MAN",
+      "category": "Fêtard",
+      "value": "1"
+    },
+    "3": {
+      "text": "pas très bon en anglais",
+      "category": "Blasé",
+      "value": "1"
+    },
+    "4": {
+      "text": "a barbie girl in a barbie world",
+      "category": "Sympa",
+      "value": "1"
+    }
+  },
+  "8": {
+    "question": "Les réptiliens dominent le monde",
+    "1": {
+      "text": "Tu le savais... tounéketrompri",
+      "category": "Sympa",
+      "value": "1"
+    },
+    "2": {
+      "text": "Les reptiliens n'existe pas",
+      "category": "Sérieux",
+      "value": "1"
+    },
+    "3": {
+      "text": "Pas du tout c'est les machines. Y a déjà eu des études qui émettent l'hypothèse qu'on est dans la matrice...",
+      "category": "Informatique",
+      "value": "1"
+    },
+    "4": {
+      "text": "Mouai... ça me parait un peu chelou cette histoire",
+      "category": "Blasé",
+      "value": "1"
+    }
+  },
+  "9": {
+    "question": "Tu dois monter un meuble IKEA",
+    "1": {
+      "text": "Tu fonces têtes baissée, le manuel c'est pour les faibles",
+      "category": "Aventurier",
+      "value": "1"
+    },
+    "2": {
+      "text": "T'as un peu la flemme",
+      "category": "Blasé",
+      "value": "1"
+    },
+    "3": {
+      "text": "Tu alignes toutes les vis dans une petite boite, tu potasses le manuel et tu respectes bien tout étape par étape",
+      "category": "Sérieux",
+      "value": "1"
+    },
+    "4": {
+      "text": "IK-EAAAAAAAA",
+      "category": "Sympa",
+      "value": "1"
+    }
+  },
+  "10": {
+    "question": "Tu es plutôt du genre : ",
+    "1": {
+      "text": "Sensible au mot magique 'Apéro'.",
+      "category": "Fêtard",
+      "value": "1"
+    },
+    "2": {
+      "text": "'Hardworker', le top 1 en vue.",
+      "category": "Sérieux",
+      "value": "1"
+    },
+    "3": {
+      "text": "Toujours là pour donner un coup de pouce.",
+      "category": "Sympa",
+      "value": "1"
+    },
+    "4": {
+      "text": "L'effort, c'est pas ton fort !",
+      "category": "Flemmard",
+      "value": "1"
+    }
+  },
+  "11": {
+    "question": "PC ou MAC",
+    "1": {
+      "text": "PC",
+      "category": "Informatique",
+      "value": "2"
+    },
+    "2": {
+      "text": "MAC",
+      "category": "Informatique",
+      "value": "0"
+    },
+    "3": {
+      "text": "MAC",
+      "category": "Informatique",
+      "value": "0"
+    },
+    "4": {
+      "text": "PC",
+      "category": "Informatique",
+      "value": "2"
+    }
+  },
+  "12": {
+    "question": "Les sorties, les voyages pour toi c'est :",
+    "1": {
+      "text": "Un calvaire, tu es casanier et fier de l'être !",
+      "category": "Aventurier",
+      "value": "0"
+    },
+    "2": {
+      "text": "En fonction de ton niveau de flemme.",
+      "category": "Aventurier",
+      "value": "1"
+    },
+    "3": {
+      "text": "Cool une fois de temps en temps.",
+      "category": "Aventurier",
+      "value": "2"
+    },
+    "4": {
+      "text": "Ta raison de vivre. Vive l'aventure !",
+      "category": "Aventurier",
+      "value": "3"
+    }
+  },
+  "13": {
+    "question": "La réponse est vraiment grosse :",
+    "1": {
+      "text": "LA REPONSE",
+      "category": "Sympa",
+      "value": "1"
+    },
+    "2": {
+      "text": "Vraiment grosse",
+      "category": "Blasé",
+      "value": "1"
+    },
+    "3": {
+      "text": "Un éléphant",
+      "category": "Sérieux",
+      "value": "1"
+    },
+    "4": {
+      "text": "Error : données insufisantes",
+      "category": "Informatique",
+      "value": "1"
+    }
+  },
+  "14": {
+    "question": "Une personne se précipite et se prend une porte vitrée. Toi ...",
+    "1": {
+      "text": "Tu te demandes s'il va bien. Il peut être blessé.",
+      "category": "Sympa",
+      "value": "3"
+    },
+    "2": {
+      "text": "Tu essaies de rester cool et de contenir ton fou rire.",
+      "category": "Sympa",
+      "value": "2"
+    },
+    "3": {
+      "text": "Tu pars dans un fou rire incontrôlable.",
+      "category": "Sympa",
+      "value": "1"
+    },
+    "4": {
+      "text": "Tu en arrives à la conclusion que les idiots et les oiseaux ont deux choses en commun : la taille de leur cerveau et leur incapicité à voir les portes vitrées.",
+      "category": "Sympa",
+      "value": "0"
+    }
+  },
+  "15": {
+    "question": "Tu as du temps libre...",
+    "1": {
+      "text": "Tu te fais un petit footing au calme !",
+      "category": "Sportif",
+      "value": "1"
+    },
+    "2": {
+      "text": "Tu lances un appel à la bière !",
+      "category": "Fêtard",
+      "value": "1"
+    },
+    "3": {
+      "text": "Tu décides de t'avancer dans les cours.",
+      "category": "Sérieux",
+      "value": "1"
+    },
+    "4": {
+      "text": "Tu geek... bah oui",
+      "category": "Informatique",
+      "value": "1"
+    }
+  },
+  "16": {
+    "question": "L'ananas sur la pizza, pour toi c'est...",
+    "1": {
+      "text": "Délicieux ! Le sucré-salé c'est la vie.",
+      "category": "Sympa",
+      "value": "1"
+    },
+    "2": {
+      "text": "Une hérésie !",
+      "category": "Sérieux",
+      "value": "1"
+    },
+    "3": {
+      "text": "Pas encore essayé, mais je suis ouvert pour les expérimentations...",
+      "category": "Aventurier",
+      "value": "1"
+    },
+    "4": {
+      "text": "Balek.",
+      "category": "Blasé",
+      "value": "1"
+    }
+  },
+  "17": {
+    "question": "Tu es plutôt ?",
+    "1": {
+      "text": "DC / Marvel",
+      "category": "Adefinir",
+      "value": "1"
+    },
+    "2": {
+      "text": "Seigneur des anneaux",
+      "category": "Adefinir",
+      "value": "1"
+    },
+    "3": {
+      "text": "Harry Potter",
+      "category": "Adefinir",
+      "value": "1"
+    },
+    "4": {
+      "text": "Star Wars",
+      "category": "Adefinir",
+      "value": "1"
+    }
+  },
+  "18": {
+    "question": "Les films d'horreur ?",
+    "1": {
+      "text": "Ca te fais rire",
+      "category": "Adefinir",
+      "value": "1"
+    },
+    "2": {
+      "text": "Osouuuuurrr",
+      "category": "Adefinir",
+      "value": "1"
+    },
+    "3": {
+      "text": "Ca t'inspires",
+      "category": "Adefinir",
+      "value": "1"
+    },
+    "4": {
+      "text": "C'est nul",
+      "category": "Adefinir",
+      "value": "1"
+    }
+  },
+  "19": {
+    "question": "Les jeux vidéals",
+    "1": {
+      "text": "PC MASTER RACE",
+      "category": "Adefinir",
+      "value": "1"
+    },
+    "2": {
+      "text": "Consoleux",
+      "category": "Adefinir",
+      "value": "1"
+    },
+    "3": {
+      "text": "Tu joues pas à ça",
+      "category": "Adefinir",
+      "value": "1"
+    },
+    "4": {
+      "text": "Tu joues sur tout BALEK",
+      "category": "Adefinir",
+      "value": "1"
+    }
+  },
+  "20": {
+    "question": "Tu te vois plutôt comme étant",
+    "1": {
+      "text": "Discret",
+      "category": "Adefinir",
+      "value": "1"
+    },
+    "2": {
+      "text": "Rentre dedans",
+      "category": "Adefinir",
+      "value": "1"
+    },
+    "3": {
+      "text": "Comique",
+      "category": "Adefinir",
+      "value": "1"
+    },
+    "4": {
+      "text": "Mystérieux",
+      "category": "Adefinir",
+      "value": "1"
+    }
+  },
+  "21": {
+    "question": "Quel bioinfo pensez vous être / devenir ?",
+    "1": {
+      "text": "Le codeur fou",
+      "category": "Adefinir",
+      "value": "1"
+    },
+    "2": {
+      "text": "Le pousse bouton",
+      "category": "Adefinir",
+      "value": "1"
+    },
+    "3": {
+      "text": "L'élu (50% bio, 50% info)",
+      "category": "Adefinir",
+      "value": "1"
+    },
+    "4": {
+      "text": "Le statisticien",
+      "category": "Adefinir",
+      "value": "1"
+    }
+  },
+  "22": {
+    "question": "Quand tu étais petit, tu jouais...",
+    "1": {
+      "text": "aux billes",
+      "category": "Adefinir",
+      "value": "1"
+    },
+    "2": {
+      "text": "à Action man le plus grand de tous les héroooooos",
+      "category": "Adefinir",
+      "value": "1"
+    },
+    "3": {
+      "text": "au Docteur",
+      "category": "Adefinir",
+      "value": "1"
+    },
+    "4": {
+      "text": " à la Dinette",
+      "category": "Adefinir",
+      "value": "1"
+    }
+  },
+  "23": {
+    "question": "Ton Pokemon préféré (désolé elle est sale)",
+    "1": {
+      "text": "Carapute",
+      "category": "Adefinir",
+      "value": "1"
+    },
+    "2": {
+      "text": "Tortokancul",
+      "category": "Adefinir",
+      "value": "1"
+    },
+    "3": {
+      "text": "Nidoranus",
+      "category": "Adefinir",
+      "value": "1"
+    },
+    "4": {
+      "text": "Salamwesh",
+      "category": "Adefinir",
+      "value": "1"
+    }
+  },
+  "24": {
+    "question": "Ton insulte préféré",
+    "1": {
+      "text": "Catapultes tes grands morts",
+      "category": "Adefinir",
+      "value": "1"
+    },
+    "2": {
+      "text": "zut alors !",
+      "category": "Adefinir",
+      "value": "1"
+    },
+    "3": {
+      "text": "Leche moi le Pélo",
+      "category": "Adefinir",
+      "value": "1"
+    },
+    "4": {
+      "text": "Ta mère est tellement grosse que quand elle monte sur une balance ça écrit ton adresse IP",
+      "category": "Adefinir",
+      "value": "1"
+    }
+  },
+  "25": {
+    "question": "A propos de ton parrain / filleul...",
+    "1": {
+      "text": "Tu espères juste qu'il ne sera pas ce mec ou cette meuf chelou qui te fixes du regard dans le tram",
+      "category": "Adefinir",
+      "value": "1"
+    },
+    "2": {
+      "text": "Tu l'imagines grand(e), beau/belle, le regard pénétrant, intelligent(e) et probablement futur(e) prix nobel ",
+      "category": "Adefinir",
+      "value": "1"
+    },
+    "3": {
+      "text": "Il/elle a intérêt à être cool et marrant(e)",
+      "category": "Adefinir",
+      "value": "1"
+    },
+    "4": {
+      "text": "Tu veux être surpris \n\n ( ͡° ͜ʖ ͡°)",
+      "category": "Adefinir",
+      "value": "1"
+    }
+  }
+
+}
