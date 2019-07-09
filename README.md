@@ -5,5 +5,5 @@
 - Langage : C++
 
 ## Dossier Appli 2019/2020
-- Créateur ###
-- Langage : ###
+- Créateur Coralie MULLER/Domitille COQ--ETCHEGARAY
+- Langage : R
