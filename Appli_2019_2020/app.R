@@ -1,11 +1,10 @@
 library(shiny)
 library(shinydashboard)
 library(shinyjs)
-library(googleVis)
 library(flexdashboard)
 library(DT)
 
-
+##### UI 
 ui2<-(dashboardPage(
   dashboardHeader(title="Martyriser des M1"),
   dashboardSidebar(
@@ -20,21 +19,23 @@ ui2<-(dashboardPage(
     tabItems(
       tabItem(tabName = "quest",
               div(id="identify",
-              wellPanel(textInput("Name", "Nom"),
-                        textInput("FirstName","Prénom"),
-                        radioButtons(inputId = "Year", 
-                                     label = "year",
-                                     choices = c("M1" = "M1",
-                                                 "M2" = "M2"),
-                                     selected = TRUE, inline=T))),
-              div(actionButton(inputId = "actBtnVisualisation", label = "Démarrer",icon = icon("play"),#style="color: #fff; background-color: #337ab7; border-color: #2e6da4" 
-                               )),
+                  wellPanel(textInput("Name", "Nom"),
+                            textInput("FirstName","Prénom"),
+                            radioButtons(inputId = "Year", 
+                                         label = "year",
+                                         choices = c("M1" = "M1",
+                                                     "M2" = "M2"),
+                                         selected = TRUE, inline=T)),
+                  actionButton(inputId = "actBtnVisualisation", label = "Démarrer",icon = icon("play")#style="color: #fff; background-color: #337ab7; border-color: #2e6da4"
+                               
+                  )),
               div(id="Questions", h3(textOutput(outputId = "ZERO")),
                   actionButton(inputId="UN",label = "TEST1",style='height:250px; width:500px;font-size:100%'),
                   actionButton(inputId="DEUX",label = "TEST2",style='height:250px;width:500px; font-size:100%'),
                   actionButton(inputId="TROIS",label = "TEST3",style='height:250px; width:500px;font-size:100%'),
                   actionButton(inputId="QUATRE",label = "TEST4",style='height:250px; width:500px;font-size:100%'),align="center"
-                  )
+              ),
+              div(id="Register",h1("END OF QUESTIONS"),tags$img(src="troll.png",width=500),align="center")
       ),
       tabItem(tabName = "Ana",
               uiOutput("page"))
@@ -50,38 +51,43 @@ ui1 <-tagList(
 )
 
 ui33 <- fluidPage(column(12,
-                        tabBox(title="Analyses des résultats",
-                               id="TabAnal",height="800px",width="12",
-                          tabPanel("Table"),
-                          tabPanel("Summary"),
-                          tabPanel("Plot")
-)))
+                         tabBox(title="Analyses des résultats",
+                                id="TabAnal",height="800px",width="12",
+                                tabPanel("Table"),
+                                tabPanel("Summary"),
+                                tabPanel("Plot")
+                         )))
 
 
+###### SERVEUR 
 
 server <- shinyServer(function(input,output,session){
   df<-reactiveValues(a=0)
   dataquestions <- reactiveValues()
+  dataresults <- reactiveValues()
   hide(id="Questions")
+  hide(id="Register")
   observeEvent(input$actBtnVisualisation, {
     dataquestions$table = read.csv("test.csv",header=TRUE,sep=",")
     hide(id="identify")
-    hide(id="actBtnVisualisation")
     show(id="Questions")
     output$ZERO <- renderText({paste(dataquestions$table$QUESTIONS[df$a])})
     updateActionButton(session,"UN",label=dataquestions$table$REP1[df$a])
     updateActionButton(session,"DEUX",label=dataquestions$table$REP2[df$a])
     updateActionButton(session,"TROIS",label=dataquestions$table$REP3[df$a])
     updateActionButton(session,"QUATRE",label=dataquestions$table$REP4[df$a])
-    })
+  })
   observeEvent((input$UN | input$DEUX | input$TROIS | input$QUATRE), 
                {
                  df$a= df$a  + 1
-                 output$ZERO <- renderText({paste(dataquestions$table$QUESTIONS[df$a])})
-                 updateActionButton(session,"UN",label=dataquestions$table$REP1[df$a])
-                 updateActionButton(session,"DEUX",label=dataquestions$table$REP2[df$a])
-                 updateActionButton(session,"TROIS",label=dataquestions$table$REP3[df$a])
-                 updateActionButton(session,"QUATRE",label=dataquestions$table$REP4[df$a])
+                 if(df$a!=(length(dataquestions$table$ID))){
+                   output$ZERO <- renderText({paste(dataquestions$table$QUESTIONS[df$a])})
+                   updateActionButton(session,"UN",label=dataquestions$table$REP1[df$a])
+                   updateActionButton(session,"DEUX",label=dataquestions$table$REP2[df$a])
+                   updateActionButton(session,"TROIS",label=dataquestions$table$REP3[df$a])
+                   updateActionButton(session,"QUATRE",label=dataquestions$table$REP4[df$a])
+                 }else{hide(id="Questions")
+                   show(id="Register")}
                })
   
   Logged = FALSE;
