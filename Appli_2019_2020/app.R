@@ -3,8 +3,16 @@ library(shinydashboard)
 library(shinyjs)
 library(flexdashboard)
 library(DT)
+library(proxy)
+library(reshape2)
 
-##### UI 
+####Domitille COQ--ETCHEGARAY####
+####Coralie MULLER###
+####JUILLET 2019####
+####APPLI PARRAINAGE 2019/2020####
+
+
+######UI###### 
 ui2<-(dashboardPage(
   dashboardHeader(title="Martyriser des M1"),
   dashboardSidebar(
@@ -53,15 +61,27 @@ ui1 <-tagList(
 ui33 <- fluidPage(column(12,
                          tabBox(title="Analyses des résultats",
                                 id="TabAnal",height="800px",width="12",
-                                tabPanel("Table"),
-                                tabPanel("Summary"),
-                                tabPanel("Plot")
+                                tabPanel("Table",
+                                         fileInput("dataFileM1",label = NULL,
+                                                   buttonLabel = "Browse...",
+                                                   placeholder = "M1 FILE"),
+                                         fileInput("dataFileM2",label = NULL,
+                                                   buttonLabel = "Browse...",
+                                                   placeholder = "M2 FILE"),
+                                         div(actionButton(inputId = "act", label = "Visualisation",icon = icon("play"))),
+                                         dataTableOutput(outputId="tableM1"),
+                                         dataTableOutput(outputId="tableM2")),
+                                
+                                tabPanel("Algo",div(actionButton(inputId = "match", label = "IT'S A MATCH",icon = icon("play"))),dataTableOutput(outputId="final"))
                          )))
 
 
-###### SERVEUR 
+######SERVEUR######
 
 server <- shinyServer(function(input,output,session){
+  
+  
+  ####QUESTIONNAIRE####
   df<-reactiveValues(a=0)
   dataquestions <- reactiveValues()
   dataresults <- reactiveValues()
@@ -90,6 +110,44 @@ server <- shinyServer(function(input,output,session){
                    show(id="Register")}
                })
   
+  
+  ####RESULTATS####
+  ####LECTURE DES CSV####
+  data<-reactiveValues()
+  observeEvent(input$act, {
+    if(!is.null(input$dataFileM1$datapath)|!is.null(input$dataFileM2$datapath)){
+      # Read input file
+      data$M1 = read.csv(file=input$dataFileM1$datapath,
+                         header = TRUE,
+                         row.names="X")
+      data$M2 = read.csv(file=input$dataFileM2$datapath,
+                         header = TRUE,
+                         row.names = "X")
+      
+      output$tableM1 <- DT::renderDataTable(data$M1)
+      output$tableM2 <- DT::renderDataTable(data$M2)}})
+  
+  ####ALGO MATCHER####
+  observeEvent(input$match, {
+    final<-data.frame()
+    test<-simil(data$M1,data$M2)
+    res<-as.data.frame.matrix(test)
+    res<- melt(as.matrix(res),varnames=c("M1","M2"))
+    df <- res[order(-res$value),]
+    
+    
+    for(i in 1:9){
+      final<-rbind(final,df[1,])
+      
+      
+      df<-subset(df,df$M1!=df$M1[1])
+      df<-subset(df,df$M2!=df$M2[1])
+    }
+    output$final <- DT::renderDataTable(final)
+  })
+  
+  
+  ######LOGIN######
   Logged = FALSE;
   my_username <- "Omnia"
   my_password <- "Sakura"
