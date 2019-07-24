@@ -27,13 +27,11 @@ ui2<-(dashboardPage(
     tabItems(
       tabItem(tabName = "quest",
               div(id="identify",
-                  wellPanel(textInput("Name", "Nom"),
-                            textInput("FirstName","Prénom"),
-                            radioButtons(inputId = "Year", 
-                                         label = "year",
-                                         choices = c("M1" = "M1",
-                                                     "M2" = "M2"),
-                                         selected = TRUE, inline=T)),
+                  wellPanel(textInput("Name", "Nom et Prénom"),
+                            #textInput("FirstName","Prénom"),
+                            radioButtons("year", "Year",
+                                         c("M1" = "M1",
+                                           "M2" = "M2"))),
                   actionButton(inputId = "actBtnVisualisation", label = "Démarrer",icon = icon("play")#style="color: #fff; background-color: #337ab7; border-color: #2e6da4"
                                
                   )),
@@ -88,6 +86,17 @@ server <- shinyServer(function(input,output,session){
   hide(id="Questions")
   hide(id="Register")
   observeEvent(input$actBtnVisualisation, {
+    
+    #### Write CS  FONCTIONNE
+                     
+    if(input$year=="M1"){
+      data<-c(input$Name)
+      read.csv("M1.csv")
+      write.table(data, file = "M1.csv",row.names= FALSE ,col.names="Nom")
+    } else{ data<-c(input$Name)
+      read.csv("M1.csv")
+      write.table(test, file = "M2.csv",row.names= FALSE,col.names="Nom")}
+    
     dataquestions$table = read.csv("test.csv",header=TRUE,sep=",")
     hide(id="identify")
     show(id="Questions")
@@ -98,7 +107,32 @@ server <- shinyServer(function(input,output,session){
     updateActionButton(session,"QUATRE",label=dataquestions$table$REP4[df$a])
   })
   observeEvent((input$UN | input$DEUX | input$TROIS | input$QUATRE), 
-               {
+               { 
+                 if(input$year=="M1"){
+                  if(!is.null(input$UN)){ #### Probleme de stockage et d'equilibre
+                 test<-1
+                 print("test")
+                 write.csv(test, file = "M1.csv",row.names= FALSE,col.names="Nom")
+                  } 
+                   if (!is.null(input$DEUX)){
+                    data<-2
+                    print("coco")
+                    write.csv(data,file="M1.csv")
+                  }}
+                 
+                 if(input$year=="M2"){
+                   if(!is.null(input$UN)){
+                     test<-1
+                     print("test")
+                     write.csv(test, file = "M1.csv",row.names= FALSE,col.names="Nom")
+                   } else if (!is.null(input$DEUX)){
+                     data<-2
+                     print("coco")
+                     write.csv(data,file="M1.csv")
+                   }}
+                 
+                 
+                 
                  df$a= df$a  + 1
                  if(df$a!=(length(dataquestions$table$ID))){
                    output$ZERO <- renderText({paste(dataquestions$table$QUESTIONS[df$a])})
@@ -107,7 +141,8 @@ server <- shinyServer(function(input,output,session){
                    updateActionButton(session,"TROIS",label=dataquestions$table$REP3[df$a])
                    updateActionButton(session,"QUATRE",label=dataquestions$table$REP4[df$a])
                  }else{hide(id="Questions")
-                   show(id="Register")}
+                   show(id="Register")
+                   read.csv(".csv")}
                })
   
   
@@ -157,7 +192,6 @@ server <- shinyServer(function(input,output,session){
     if (USER$Logged==FALSE){
       if(!is.null(input$Login)){
         if(input$Login>0){
-          
           Username <- isolate(input$userName)
           Password <- isolate(input$passwd)
           Id.username <- which(my_username == Username)
