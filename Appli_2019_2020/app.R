@@ -5,6 +5,7 @@ library(flexdashboard)
 library(DT)
 library(proxy)
 library(reshape2)
+library(MASS)
 
 ####Domitille COQ--ETCHEGARAY####
 ####Coralie MULLER###
@@ -81,21 +82,23 @@ server <- shinyServer(function(input,output,session){
   
   ####QUESTIONNAIRE####
   df<-reactiveValues(a=0)
+  quest<-reactiveValues(r=1)
   dataquestions <- reactiveValues()
   dataresults <- reactiveValues()
   hide(id="Questions")
   hide(id="Register")
   observeEvent(input$actBtnVisualisation, {
     
+    #### Probleme a regle: pas de passage d'une ligne a une autre en stoquant les precedants noms
+    #                      passage d'une colonne a une autre en effacant pas les autre
     #### Write CS  FONCTIONNE
-                     
+  values <- reactiveValues()
+  values$dft <- data.frame(Names = input$Name, Question1 = NA, Question2 = NA, Question3 = NA, Question4 = NA, Question5 = NA )   
+  
     if(input$year=="M1"){
-      data<-c(input$Name)
-      read.csv("M1.csv")
-      write.table(data, file = "M1.csv",row.names= FALSE ,col.names="Nom")
-    } else{ data<-c(input$Name)
-      read.csv("M1.csv")
-      write.table(test, file = "M2.csv",row.names= FALSE,col.names="Nom")}
+      write.csv(values$dft, file = "M1.csv",row.names= FALSE )
+    }else{ 
+      write.csv(values$dft, file = "M2.csv",row.names= FALSE)}
     
     dataquestions$table = read.csv("test.csv",header=TRUE,sep=",")
     hide(id="identify")
@@ -108,28 +111,101 @@ server <- shinyServer(function(input,output,session){
   })
   observeEvent((input$UN | input$DEUX | input$TROIS | input$QUATRE), 
                { 
+                 df$a= df$a  + 1
+                 if(df$a!=(length(dataquestions$table$ID))){
+                   output$ZERO <- renderText({paste(dataquestions$table$QUESTIONS[df$a])})
+                   updateActionButton(session,"UN",label=dataquestions$table$REP1[df$a])
+                   updateActionButton(session,"DEUX",label=dataquestions$table$REP2[df$a])
+                   updateActionButton(session,"TROIS",label=dataquestions$table$REP3[df$a])
+                   updateActionButton(session,"QUATRE",label=dataquestions$table$REP4[df$a])
+                 }else{hide(id="Questions")
+                   show(id="Register")
+                   }
+               })
+  observeEvent((input$UN ), 
+               { 
+                 quest$r= quest$r + 1
+                 values <- reactiveValues()
+                 values$dft <- data.frame(Names = input$Name, Question1 = NA, Question2 = NA, Question3 = NA, Question4 = NA, Question5 = NA )
                  if(input$year=="M1"){
-                  if(!is.null(input$UN)){ #### Probleme de stockage et d'equilibre
-                 test<-1
-                 print("test")
-                 write.csv(test, file = "M1.csv",row.names= FALSE,col.names="Nom")
-                  } 
-                   if (!is.null(input$DEUX)){
-                    data<-2
-                    print("coco")
-                    write.csv(data,file="M1.csv")
-                  }}
+                  values$dft$Question[quest$r]
+                  values<-values$dft$Question[quest$r]
+                   test<-1
+                   print("test")
+                   write(test, file = "M1.csv")
+                 } else{ data<-c(input$Name)
+                 read.csv("M2.csv")
+                 write.csv(data, file = "M2.csv",row.names= FALSE,col.names="Nom")}
                  
-                 if(input$year=="M2"){
-                   if(!is.null(input$UN)){
-                     test<-1
-                     print("test")
-                     write.csv(test, file = "M1.csv",row.names= FALSE,col.names="Nom")
-                   } else if (!is.null(input$DEUX)){
-                     data<-2
-                     print("coco")
-                     write.csv(data,file="M1.csv")
-                   }}
+                 
+                 
+                 df$a= df$a  + 1
+                 if(df$a!=(length(dataquestions$table$ID))){
+                   output$ZERO <- renderText({paste(dataquestions$table$QUESTIONS[df$a])})
+                   updateActionButton(session,"UN",label=dataquestions$table$REP1[df$a])
+                   updateActionButton(session,"DEUX",label=dataquestions$table$REP2[df$a])
+                   updateActionButton(session,"TROIS",label=dataquestions$table$REP3[df$a])
+                   updateActionButton(session,"QUATRE",label=dataquestions$table$REP4[df$a])
+                 }else{hide(id="Questions")
+                   show(id="Register")
+                   read.csv(".csv")}
+               })
+  observeEvent((input$DEUX ), 
+               { 
+                 if(input$year=="M1"){
+                   test<-1
+                   print("COCO")
+                   write.csv(test, file = "M1.csv",row.names= FALSE,col.names=TRUE)
+                 } else{ data<-c(input$Name)
+                 read.csv("M2.csv")
+                 write.csv(data, file = "M2.csv",row.names= FALSE,col.names="Nom")}
+                 
+                 
+                 
+                 df$a= df$a  + 1
+                 if(df$a!=(length(dataquestions$table$ID))){
+                   output$ZERO <- renderText({paste(dataquestions$table$QUESTIONS[df$a])})
+                   updateActionButton(session,"UN",label=dataquestions$table$REP1[df$a])
+                   updateActionButton(session,"DEUX",label=dataquestions$table$REP2[df$a])
+                   updateActionButton(session,"TROIS",label=dataquestions$table$REP3[df$a])
+                   updateActionButton(session,"QUATRE",label=dataquestions$table$REP4[df$a])
+                 }else{hide(id="Questions")
+                   show(id="Register")
+                   read.csv(".csv")}
+               })
+  observeEvent((input$TROIS ), 
+               { 
+                 if(input$year=="M1"){
+                   test<-1
+                   print("OK")
+                   write.csv(test, file = "M1.csv",row.names= FALSE,col.names=TRUE)
+                 } else{ data<-c(input$Name)
+                 read.csv("M2.csv")
+                 write.csv(data, file = "M2.csv",row.names= FALSE,col.names="Nom")}
+                 
+                 
+                 
+                 df$a= df$a  + 1
+                 if(df$a!=(length(dataquestions$table$ID))){
+                   output$ZERO <- renderText({paste(dataquestions$table$QUESTIONS[df$a])})
+                   updateActionButton(session,"UN",label=dataquestions$table$REP1[df$a])
+                   updateActionButton(session,"DEUX",label=dataquestions$table$REP2[df$a])
+                   updateActionButton(session,"TROIS",label=dataquestions$table$REP3[df$a])
+                   updateActionButton(session,"QUATRE",label=dataquestions$table$REP4[df$a])
+                 }else{hide(id="Questions")
+                   show(id="Register")
+                   read.csv(".csv")}
+               })
+  
+  observeEvent((input$QUATRE), 
+               { 
+                 if(input$year=="M1"){
+                   test<-1
+                   print("SHIT")
+                   write.table(test, file = "M1.csv",row.names= FALSE,col.names=TRUE)
+                 } else{ data<-c(input$Name)
+                 read.csv("M2.csv")
+                 write.table(data, file = "M2.csv",row.names= FALSE,col.names="Nom")}
                  
                  
                  
