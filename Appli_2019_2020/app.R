@@ -15,14 +15,16 @@ library(MASS)
 
 ######UI###### 
 ui2<-(dashboardPage(
-  dashboardHeader(title="Martyriser des M1"),
+  dashboardHeader(title="Parrainage"),
   dashboardSidebar(
     sidebarMenu(id = "tabs",
                 menuItem("Questionnaire", tabName = "quest", icon = icon("readme")),
-                menuItem("Access Result",tabName = "Ana", icon = icon("poll"))
+                menuItem("Résultats",tabName = "Ana", icon = icon("poll"))
     )
   ),
   dashboardBody(
+    tags$head(
+      tags$link(rel="stylesheet",type = "text/css",href = "custom.css")),
     useShinyjs(),
     # Read data
     tabItems(
@@ -33,14 +35,14 @@ ui2<-(dashboardPage(
                             radioButtons("year", "Year",
                                          c("M1" = "M1",
                                            "M2" = "M2"))),
-                  actionButton(inputId = "actBtnVisualisation", label = "Démarrer",icon = icon("play")#style="color: #fff; background-color: #337ab7; border-color: #2e6da4"
+                  actionButton(inputId = "actBtnVisualisation", label = "Démarrer",icon = icon("play")
                                
                   )),
               div(id="Questions", h3(textOutput(outputId = "ZERO")),
-                  actionButton(inputId="UN",label = "TEST1",style='height:250px; width:500px;font-size:100%'),
-                  actionButton(inputId="DEUX",label = "TEST2",style='height:250px;width:500px; font-size:100%'),
-                  actionButton(inputId="TROIS",label = "TEST3",style='height:250px; width:500px;font-size:100%'),
-                  actionButton(inputId="QUATRE",label = "TEST4",style='height:250px; width:500px;font-size:100%'),align="center"
+                  actionButton(inputId="UN",label = "TEST1"),
+                  actionButton(inputId="DEUX",label = "TEST2"),
+                  actionButton(inputId="TROIS",label = "TEST3"),
+                  actionButton(inputId="QUATRE",label = "TEST4"),align="center"
               ),
               div(id="Register",h1("END OF QUESTIONS"),tags$img(src="troll.png",width=500),align="center")
       ),
@@ -78,7 +80,6 @@ ui33 <- fluidPage(column(12,
 ######SERVEUR######
 
 server <- shinyServer(function(input,output,session){
-  
   
   ####QUESTIONNAIRE####
   df<-reactiveValues(a=0)
