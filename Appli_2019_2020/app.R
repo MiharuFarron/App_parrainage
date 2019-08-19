@@ -44,8 +44,13 @@ ui2<-(dashboardPage(
                   actionButton(inputId="TROIS",label = "TEST3"),
                   actionButton(inputId="QUATRE",label = "TEST4"),align="center"
               ),
-              div(id="Register",h1("END OF QUESTIONS"),tags$img(src="troll.png",width=500),align="center")
+              div(id="Register",h1("END OF QUESTIONS"),tags$img(src="troll.png",width=500),align="center",
+                  actionButton(inputId = "buttonsave", label = "Save",icon = icon("play"), align="center"))
+            
       ),
+              
+                 
+      
       tabItem(tabName = "Ana",
               uiOutput("page"))
     ))
@@ -82,6 +87,7 @@ ui33 <- fluidPage(column(12,
 server <- shinyServer(function(input,output,session){
   
   ####QUESTIONNAIRE####
+  res=1
   df<-reactiveValues(a=0)
   quest<-reactiveValues(r=1)
   dataquestions <- reactiveValues()
@@ -90,17 +96,15 @@ server <- shinyServer(function(input,output,session){
   hide(id="Register")
   observeEvent(input$actBtnVisualisation, {
     
-    #### Probleme a regle: pas de passage d'une ligne a une autre en stoquant les precedants noms
-    #                      passage d'une colonne a une autre en effacant pas les autre
-    #### Write CS  FONCTIONNE
-  values <- reactiveValues()
-  values$dft <- data.frame(Names = input$Name, Question1 = NA, Question2 = NA, Question3 = NA, Question4 = NA, Question5 = NA )   
-  
-    if(input$year=="M1"){
-      write.csv(values$dft, file = "M1.csv",row.names= FALSE )
-    }else{ 
-      write.csv(values$dft, file = "M2.csv",row.names= FALSE)}
+
     
+    #### Write CS  FONCTIONNE
+    if(input$year=="M1"){
+      res=input$Name
+      print(res)
+    }else{ 
+      res=input$Name}
+
     dataquestions$table = read.csv("test.csv",header=TRUE,sep=",")
     hide(id="identify")
     show(id="Questions")
@@ -125,19 +129,14 @@ server <- shinyServer(function(input,output,session){
                })
   observeEvent((input$UN ), 
                { 
-                 quest$r= quest$r + 1
-                 values <- reactiveValues()
-                 values$dft <- data.frame(Names = input$Name, Question1 = NA, Question2 = NA, Question3 = NA, Question4 = NA, Question5 = NA )
                  if(input$year=="M1"){
-                  values$dft$Question[quest$r]
-                  values<-values$dft$Question[quest$r]
-                   test<-1
-                   print("test")
-                   write(test, file = "M1.csv")
-                 } else{ data<-c(input$Name)
-                 read.csv("M2.csv")
-                 write.csv(data, file = "M2.csv",row.names= FALSE,col.names="Nom")}
-                 
+                  res=paste(res,"1", sep=";")
+                   print(res)
+                 } else{ 
+                   res=paste(res,"1", sep=";")
+                   print(res)
+                   
+}
                  
                  
                  df$a= df$a  + 1
@@ -149,18 +148,19 @@ server <- shinyServer(function(input,output,session){
                    updateActionButton(session,"QUATRE",label=dataquestions$table$REP4[df$a])
                  }else{hide(id="Questions")
                    show(id="Register")
+                   show(id="Save")
                    read.csv(".csv")}
                })
   observeEvent((input$DEUX ), 
                { 
                  if(input$year=="M1"){
-                   test<-1
-                   print("COCO")
-                   write.csv(test, file = "M1.csv",row.names= FALSE,col.names=TRUE)
-                 } else{ data<-c(input$Name)
-                 read.csv("M2.csv")
-                 write.csv(data, file = "M2.csv",row.names= FALSE,col.names="Nom")}
-                 
+                   res=paste(res,"2", sep=";")
+                   print(res)
+                 } else{ 
+                   res=paste(res,"2", sep=";")
+                   print(res)
+                   
+                 }
                  
                  
                  df$a= df$a  + 1
@@ -172,18 +172,19 @@ server <- shinyServer(function(input,output,session){
                    updateActionButton(session,"QUATRE",label=dataquestions$table$REP4[df$a])
                  }else{hide(id="Questions")
                    show(id="Register")
+                   show(id="Save")
                    read.csv(".csv")}
                })
   observeEvent((input$TROIS ), 
                { 
                  if(input$year=="M1"){
-                   test<-1
-                   print("OK")
-                   write.csv(test, file = "M1.csv",row.names= FALSE,col.names=TRUE)
-                 } else{ data<-c(input$Name)
-                 read.csv("M2.csv")
-                 write.csv(data, file = "M2.csv",row.names= FALSE,col.names="Nom")}
-                 
+                   res=paste(res,"3", sep=";")
+                   print(res)
+                 } else{ 
+                   res=paste(res,"3", sep=";")
+                   print(res)
+                   
+                 }
                  
                  
                  df$a= df$a  + 1
@@ -195,19 +196,20 @@ server <- shinyServer(function(input,output,session){
                    updateActionButton(session,"QUATRE",label=dataquestions$table$REP4[df$a])
                  }else{hide(id="Questions")
                    show(id="Register")
+                   show(id="Save")
                    read.csv(".csv")}
                })
   
   observeEvent((input$QUATRE), 
                { 
                  if(input$year=="M1"){
-                   test<-1
-                   print("SHIT")
-                   write.table(test, file = "M1.csv",row.names= FALSE,col.names=TRUE)
-                 } else{ data<-c(input$Name)
-                 read.csv("M2.csv")
-                 write.table(data, file = "M2.csv",row.names= FALSE,col.names="Nom")}
-                 
+                   res=paste(res,"4", sep=";")
+                   print(res)
+                 } else{ 
+                   res=paste(res,"4", sep=";")
+                   print(res)
+                   
+                 }
                  
                  
                  df$a= df$a  + 1
@@ -219,8 +221,21 @@ server <- shinyServer(function(input,output,session){
                    updateActionButton(session,"QUATRE",label=dataquestions$table$REP4[df$a])
                  }else{hide(id="Questions")
                    show(id="Register")
+                   show(id="Save")
                    read.csv(".csv")}
                })
+  
+  observeEvent((input$buttonsave),
+      if(input$year=="M1"){
+      
+        write.table(res, file = "M1.csv", row.names= FALSE, col.names = FALSE, append = TRUE )
+     }else{ 
+      write.table(res , file = "M2.csv",row.names= FALSE, col.names = FALSE, append = TRUE)},
+      # hide(id="Register"),
+      # hide(id="Save"),
+      # show(id="identify")
+    
+  )
   
   
   ####RESULTATS####
