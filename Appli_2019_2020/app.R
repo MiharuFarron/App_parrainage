@@ -1,17 +1,18 @@
 library(shiny)
 library(shinydashboard)
+library(shinyWidgets)
 library(shinyjs)
 library(flexdashboard)
 library(DT)
 library(proxy)
 library(reshape2)
 library(MASS)
-
 ####Domitille COQ--ETCHEGARAY####
 ####Coralie MULLER###
 ####JUILLET 2019####
 ####APPLI PARRAINAGE 2019/2020####
 
+jsResetCode <- "shinyjs.reset = function() {history.go(0)}"
 
 ######UI###### 
 ui2<-(dashboardPage(
@@ -44,12 +45,13 @@ ui2<-(dashboardPage(
                   actionButton(inputId="TROIS",label = "TEST3"),
                   actionButton(inputId="QUATRE",label = "TEST4"),align="center"
               ),
-              div(id="Register",h1("END OF QUESTIONS"),tags$img(src="troll.png",width=500),align="center",
-                  actionButton(inputId = "buttonsave", label = "Save",icon = icon("play"), align="center"))
-            
-      ),
+              div(id="Register",h1("END OF QUESTIONS"),tags$img(src="troll.png",width=500),align="center",br(),
+                  actionButton(inputId = "buttonsave", label = "Save",icon = icon("play"), align="center"),
+                  extendShinyjs(text = jsResetCode), 
+                  actionButton(inputId = "resetbutton", "Restart",icon = icon("play"), align="center"))
               
-                 
+      ),
+      
       
       tabItem(tabName = "Ana",
               uiOutput("page"))
@@ -87,7 +89,7 @@ ui33 <- fluidPage(column(12,
 server <- shinyServer(function(input,output,session){
   
   ####QUESTIONNAIRE####
-  res=1
+  res<-reactiveValues(resQuest="")
   df<-reactiveValues(a=0)
   quest<-reactiveValues(r=1)
   dataquestions <- reactiveValues()
@@ -95,16 +97,11 @@ server <- shinyServer(function(input,output,session){
   hide(id="Questions")
   hide(id="Register")
   observeEvent(input$actBtnVisualisation, {
-    
-
-    
     #### Write CS  FONCTIONNE
     if(input$year=="M1"){
-      res=input$Name
-      print(res)
+      res$resQuest=input$Name
     }else{ 
-      res=input$Name}
-
+      res$resQuest=input$Name}
     dataquestions$table = read.csv("test.csv",header=TRUE,sep=",")
     hide(id="identify")
     show(id="Questions")
@@ -114,6 +111,7 @@ server <- shinyServer(function(input,output,session){
     updateActionButton(session,"TROIS",label=dataquestions$table$REP3[df$a])
     updateActionButton(session,"QUATRE",label=dataquestions$table$REP4[df$a])
   })
+  
   observeEvent((input$UN | input$DEUX | input$TROIS | input$QUATRE), 
                { 
                  df$a= df$a  + 1
@@ -125,117 +123,42 @@ server <- shinyServer(function(input,output,session){
                    updateActionButton(session,"QUATRE",label=dataquestions$table$REP4[df$a])
                  }else{hide(id="Questions")
                    show(id="Register")
-                   }
-               })
-  observeEvent((input$UN ), 
-               { 
-                 if(input$year=="M1"){
-                  res=paste(res,"1", sep=";")
-                   print(res)
-                 } else{ 
-                   res=paste(res,"1", sep=";")
-                   print(res)
-                   
-}
-                 
-                 
-                 df$a= df$a  + 1
-                 if(df$a!=(length(dataquestions$table$ID))){
-                   output$ZERO <- renderText({paste(dataquestions$table$QUESTIONS[df$a])})
-                   updateActionButton(session,"UN",label=dataquestions$table$REP1[df$a])
-                   updateActionButton(session,"DEUX",label=dataquestions$table$REP2[df$a])
-                   updateActionButton(session,"TROIS",label=dataquestions$table$REP3[df$a])
-                   updateActionButton(session,"QUATRE",label=dataquestions$table$REP4[df$a])
-                 }else{hide(id="Questions")
-                   show(id="Register")
-                   show(id="Save")
-                   read.csv(".csv")}
-               })
-  observeEvent((input$DEUX ), 
-               { 
-                 if(input$year=="M1"){
-                   res=paste(res,"2", sep=";")
-                   print(res)
-                 } else{ 
-                   res=paste(res,"2", sep=";")
-                   print(res)
-                   
                  }
-                 
-                 
-                 df$a= df$a  + 1
-                 if(df$a!=(length(dataquestions$table$ID))){
-                   output$ZERO <- renderText({paste(dataquestions$table$QUESTIONS[df$a])})
-                   updateActionButton(session,"UN",label=dataquestions$table$REP1[df$a])
-                   updateActionButton(session,"DEUX",label=dataquestions$table$REP2[df$a])
-                   updateActionButton(session,"TROIS",label=dataquestions$table$REP3[df$a])
-                   updateActionButton(session,"QUATRE",label=dataquestions$table$REP4[df$a])
-                 }else{hide(id="Questions")
-                   show(id="Register")
-                   show(id="Save")
-                   read.csv(".csv")}
-               })
-  observeEvent((input$TROIS ), 
-               { 
-                 if(input$year=="M1"){
-                   res=paste(res,"3", sep=";")
-                   print(res)
-                 } else{ 
-                   res=paste(res,"3", sep=";")
-                   print(res)
-                   
-                 }
-                 
-                 
-                 df$a= df$a  + 1
-                 if(df$a!=(length(dataquestions$table$ID))){
-                   output$ZERO <- renderText({paste(dataquestions$table$QUESTIONS[df$a])})
-                   updateActionButton(session,"UN",label=dataquestions$table$REP1[df$a])
-                   updateActionButton(session,"DEUX",label=dataquestions$table$REP2[df$a])
-                   updateActionButton(session,"TROIS",label=dataquestions$table$REP3[df$a])
-                   updateActionButton(session,"QUATRE",label=dataquestions$table$REP4[df$a])
-                 }else{hide(id="Questions")
-                   show(id="Register")
-                   show(id="Save")
-                   read.csv(".csv")}
                })
   
-  observeEvent((input$QUATRE), 
-               { 
-                 if(input$year=="M1"){
-                   res=paste(res,"4", sep=";")
-                   print(res)
-                 } else{ 
-                   res=paste(res,"4", sep=";")
-                   print(res)
-                   
-                 }
-                 
-                 
-                 df$a= df$a  + 1
-                 if(df$a!=(length(dataquestions$table$ID))){
-                   output$ZERO <- renderText({paste(dataquestions$table$QUESTIONS[df$a])})
-                   updateActionButton(session,"UN",label=dataquestions$table$REP1[df$a])
-                   updateActionButton(session,"DEUX",label=dataquestions$table$REP2[df$a])
-                   updateActionButton(session,"TROIS",label=dataquestions$table$REP3[df$a])
-                   updateActionButton(session,"QUATRE",label=dataquestions$table$REP4[df$a])
-                 }else{hide(id="Questions")
-                   show(id="Register")
-                   show(id="Save")
-                   read.csv(".csv")}
-               })
+  observeEvent(input$UN,{
+    res$resQuest=paste(res$resQuest,1, sep=";")
+  })
+  
+  observeEvent(input$DEUX,{
+    res$resQuest=paste(res$resQuest,2, sep=";")
+  })
+  
+  observeEvent(input$TROIS,{
+    res$resQuest=paste(res$resQuest,3, sep=";")
+  })
+  
+  
+  observeEvent(input$QUATRE,{ 
+    res$resQuest=paste(res$resQuest,4, sep=";")
+  })
   
   observeEvent((input$buttonsave),
-      if(input$year=="M1"){
-      
-        write.table(res, file = "M1.csv", row.names= FALSE, col.names = FALSE, append = TRUE )
-     }else{ 
-      write.table(res , file = "M2.csv",row.names= FALSE, col.names = FALSE, append = TRUE)},
-      # hide(id="Register"),
-      # hide(id="Save"),
-      # show(id="identify")
-    
-  )
+               {print(res$resQuest)
+                 if(input$year=="M1"){
+                   write.table(res$resQuest, file = "M1.csv", row.names= FALSE, col.names = FALSE, append = TRUE,quote=FALSE )
+                 }else{
+                   write.table(res$resQuest, file = "M2.csv", row.names= FALSE, col.names = FALSE, append = TRUE,quote=FALSE)}
+                 sendSweetAlert(
+                   session=session,
+                   title="SAVE",
+                   text="Your run is saved",
+                   type="success"
+                 )
+               })
+  observeEvent(input$resetbutton, {
+    js$reset()
+  }) 
   
   
   ####RESULTATS####
@@ -246,10 +169,12 @@ server <- shinyServer(function(input,output,session){
       # Read input file
       data$M1 = read.csv(file=input$dataFileM1$datapath,
                          header = TRUE,
-                         row.names="X")
+                         row.names="X",
+                         sep = ";")
       data$M2 = read.csv(file=input$dataFileM2$datapath,
                          header = TRUE,
-                         row.names = "X")
+                         row.names = "X",
+                         sep = ";")
       
       output$tableM1 <- DT::renderDataTable(data$M1)
       output$tableM2 <- DT::renderDataTable(data$M2)}})

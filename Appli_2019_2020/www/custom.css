@@ -26,20 +26,13 @@
 .nav-tabs-custom{
   background-color : #0C1821;
 }
-.well,#actBtnVisualisation{
+.well,#actBtnVisualisation,#buttonsave{
   background-color: #033860;
   border-color: #2e6da4;
   color : #fff;
 }
 
-.well,#buttonsave{
-  background-color: #033860;
-  border-color: #2e6da4;
-  color : #fff;
-  vertical-align:bottom;
-}
-
-#match,#act{
+#match,#act,#resetbutton{
    background-color: #8e3b46;
    color : #fff;
 }
