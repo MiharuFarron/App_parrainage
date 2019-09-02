@@ -144,11 +144,11 @@ server <- shinyServer(function(input,output,session){
   })
   
   observeEvent((input$buttonsave),
-               {print(res$resQuest)
+               {
                  if(input$year=="M1"){
-                   write.table(res$resQuest, file = "M1.csv", row.names= FALSE, col.names = FALSE, append = TRUE,quote=FALSE )
+                   write.table(res$resQuest, file = "M1.csv", row.names= FALSE, col.names = FALSE, append = TRUE)
                  }else{
-                   write.table(res$resQuest, file = "M2.csv", row.names= FALSE, col.names = FALSE, append = TRUE,quote=FALSE)}
+                   write.table(res$resQuest, file = "M2.csv", row.names= FALSE, col.names = FALSE, append = TRUE)}
                  sendSweetAlert(
                    session=session,
                    title="SAVE",
@@ -188,14 +188,14 @@ server <- shinyServer(function(input,output,session){
     df <- res[order(-res$value),]
     
     
-    for(i in 1:9){
-      final<-rbind(final,df[1,])
-      
-      
-      df<-subset(df,df$M1!=df$M1[1])
-      df<-subset(df,df$M2!=df$M2[1])
-    }
-    output$final <- DT::renderDataTable(final)
+    # for(i in 1:9){
+    #   final<-rbind(final,df[1,])
+    #   
+    #   
+    #   df<-subset(df,df$M1!=df$M1[1])
+    #   df<-subset(df,df$M2!=df$M2[1])
+    # }
+    output$final <- DT::renderDataTable(df)
   })
   
   
