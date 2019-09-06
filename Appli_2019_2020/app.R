@@ -7,6 +7,9 @@ library(DT)
 library(proxy)
 library(reshape2)
 library(MASS)
+library(ggplot2)
+library(ECharts2Shiny)
+library(RColorBrewer)
 ####Domitille COQ--ETCHEGARAY####
 ####Coralie MULLER###
 ####JUILLET 2019####
@@ -81,6 +84,7 @@ ui33 <- fluidPage(column(12,
                                          dataTableOutput(outputId="tableM2")),
                                 
                                 tabPanel("Algo",div(actionButton(inputId = "match", label = "IT'S A MATCH",icon = icon("play"))),dataTableOutput(outputId="final"))
+                                         #,deliverChart(div_id = "heat"))
                          )))
 
 
@@ -196,6 +200,10 @@ server <- shinyServer(function(input,output,session){
     #   df<-subset(df,df$M2!=df$M2[1])
     # }
     output$final <- DT::renderDataTable(df)
+    heatmap(test, scale="column", col= colorRampPalette(brewer.pal(8, "Blues"))(25))
+    #renderHeatMap(div_id = "heat", test)
+    
+    
   })
   
   
