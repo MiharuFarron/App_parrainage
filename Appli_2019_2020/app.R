@@ -10,6 +10,7 @@ library(MASS)
 library(ggplot2)
 library(ECharts2Shiny)
 library(RColorBrewer)
+
 ####Domitille COQ--ETCHEGARAY####
 ####Coralie MULLER###
 ####JUILLET 2019####
@@ -38,7 +39,8 @@ ui2<-(dashboardPage(
                             #textInput("FirstName","Prénom"),
                             radioButtons("year", "Year",
                                          c("M1" = "M1",
-                                           "M2" = "M2"))),
+                                           "M2" = "M2",
+                                           "Autres" = "Autres"))),
                   actionButton(inputId = "actBtnVisualisation", label = "Démarrer",icon = icon("play")
                                
                   )),
@@ -151,8 +153,11 @@ server <- shinyServer(function(input,output,session){
                {
                  if(input$year=="M1"){
                    write.table(res$resQuest, file = "M1.csv", row.names= FALSE, col.names = FALSE, append = TRUE)
-                 }else{
+                 }else if(input$year=="M1"){
                    write.table(res$resQuest, file = "M2.csv", row.names= FALSE, col.names = FALSE, append = TRUE)}
+                 else{
+                   write.table(res$resQuest, file = "other.csv", row.names= FALSE, col.names = FALSE, append = TRUE)
+                 }
                  sendSweetAlert(
                    session=session,
                    title="SAVE",
@@ -200,6 +205,7 @@ server <- shinyServer(function(input,output,session){
     #   df<-subset(df,df$M2!=df$M2[1])
     # }
     output$final <- DT::renderDataTable(df)
+    write.csv(df, file = "res.csv")
     heatmap(test, scale="column", col= colorRampPalette(brewer.pal(8, "Blues"))(25))
     #renderHeatMap(div_id = "heat", test)
     
